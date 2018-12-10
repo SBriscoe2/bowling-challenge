@@ -1,58 +1,22 @@
-describe("Player", function() {
-  var player;
-  var song;
+// var Frame = require('../src/Frame');
 
-  beforeEach(function() {
-    player = new Player();
-    song = new Song();
-  });
+describe('Scorecard', function(){
+  var scorecard;
+  var frame;
 
-  it("should be able to play a Song", function() {
-    player.play(song);
-    expect(player.currentlyPlayingSong).toEqual(song);
+  beforeEach(function(){
+    scorecard = new scorecard();
+    scorecard.create(Frame);
+  })
 
-    //demonstrates use of custom matcher
-    expect(player).toBePlaying(song);
-  });
+  it("should not allow user to create more than 10 frames"), function() {
+    this.frames.
+    expect(scorecard.frames.length).toEqual(10);
+  };
 
-  describe("when song has been paused", function() {
-    beforeEach(function() {
-      player.play(song);
-      player.pause();
-    });
+  it("it should begin game with 0 points", function (){
+    scorecard()
+    expect(scorecard).toEqual(0);
+  })
 
-    it("should indicate that the song is currently paused", function() {
-      expect(player.isPlaying).toBeFalsy();
-
-      // demonstrates use of 'not' with a custom matcher
-      expect(player).not.toBePlaying(song);
-    });
-
-    it("should be possible to resume", function() {
-      player.resume();
-      expect(player.isPlaying).toBeTruthy();
-      expect(player.currentlyPlayingSong).toEqual(song);
-    });
-  });
-
-  // demonstrates use of spies to intercept and test method calls
-  it("tells the current song if the user has made it a favorite", function() {
-    spyOn(song, 'persistFavoriteStatus');
-
-    player.play(song);
-    player.makeFavorite();
-
-    expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
-  });
-
-  //demonstrates use of expected exceptions
-  describe("#resume", function() {
-    it("should throw an exception if song is already playing", function() {
-      player.play(song);
-
-      expect(function() {
-        player.resume();
-      }).toThrowError("song is already playing");
-    });
-  });
 });
